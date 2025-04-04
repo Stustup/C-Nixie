@@ -6834,6 +6834,17 @@
 		)
 		(uuid "83b73f72-2abb-427c-b8f0-6b0032eb6998")
 	)
+	(text "TODO: -Neuer µC, STM32H5 -> USB, RTC etc.\n	  -I2C Anschluss besseres Layout\n	  -Nirdrigere Cl für Crystal (DONE)"
+		(exclude_from_sim no)
+		(at 180.086 170.942 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "84aeed49-66fe-417d-a96d-a6306a063b53")
+	)
 	(text "Power supplies with high voltage PSU"
 		(exclude_from_sim no)
 		(at 177.8 77.47 0)
@@ -14089,7 +14100,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "18p"
+		(property "Value" "6p"
 			(at 24.892 91.44 0)
 			(effects
 				(font
@@ -14689,7 +14700,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "18p"
+		(property "Value" "6p"
 			(at 42.418 91.44 0)
 			(effects
 				(font
