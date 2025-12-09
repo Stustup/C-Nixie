@@ -25,7 +25,7 @@ The µC is a STM32G051, because it has an included RTC *with* added Vbat pin for
 The unused GPIOs are broken out to a connector, so that in the future one could add cool stuff like a radio time reciever, a display or wifi.
 Time is set manually with the push buttons on top. 
 
-The PSU is heavily inspired by (this site)[link_placeholder].  
+The PSU is heavily inspired by (this site)[https://surfncircuits.com/2018/02/03/optimizing-the-5v-to-170v-nixie-tube-power-supply-design-part-2/].  
 
 ![Control board 3d view](./Docs/CNIX%20V2%20control%20board%20front.png)
 
