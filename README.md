@@ -34,6 +34,7 @@ The PSU is heavily inspired by [this site](https://surfncircuits.com/2018/02/03/
 ## TODO
 
 - Change to new MCU. STM32H5 or ESP32. ESP32 for Wifi stuff like syncing time, Homeassistant integration etc. Could be done as module for the pinheader. STM32H5 for USBC pd
+    - Not necessary, BUT-> Create Plugion board for a DCF77 reciever conencting via GPIO
 - (DONE) lower value caps for the LSE
-- USB-PD (only with STM32H5)
-- DHT22 Temp and relative humidity sensor
+- USB-PD (only with STM32H5) (Not neccessary)
+- DHT22 Temp and relative humidity sensor -> Can be cool

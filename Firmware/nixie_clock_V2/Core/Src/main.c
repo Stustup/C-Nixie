@@ -44,10 +44,19 @@
 #include "stdio.h"
 #include "ssd1306.h"
 #include "output_tube.h"
+#include "menu.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+/**
+ * DataDigital struct to hold digital values of the time from RTC
+ */
+struct time_date_DataDigital {
+  uint8_t hours, minutes, seconds;
+
+  uint8_t day, weekday, month, year;
+} TD_data;
 
 /* USER CODE END PTD */
 
@@ -91,6 +100,21 @@
 #define false 0
 #define isNotSet 0
 #define isNotPressed 0
+
+//--------------------------------------------------------- Menu stuff makros and variables
+
+#define menu_size 4
+
+/**
+ * @brief: Main menu structure for the whole clock
+ * @param 0 -> normal time display
+ * @param 1 -> Temperature and humidity sensor (Timeout 5s)
+ * @param 2 -> time set (GETS DISABLED WHEN DCF77 PLUGIN BOARD ARE USED) (1. hours tens; 2. hours ones; 3. minutes tens; 4. minutes ones) (Timeout 30s)
+ * @param 3 -> Start/stop Time (time setting like above, but for start AND stop time) (Maybe multiple ones for morning and evening times?) (Timeout 30s) (Override with long press till next shutoff?)
+ */
+uint8_t menu[menu_size] = {0,1,2,3};
+
+uint16_t menu_time_set[4] = {1010,110,101,11};
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -118,14 +142,12 @@ char timeData[15];
 char dateData[15];
 #endif
 
-/**
- * DataDigital struct to hold digital values of the time from RTC
- */
-struct time_date_DataDigital {
-  uint8_t hours, minutes, seconds;
+HAL_StatusTypeDef setTime(uint8_t hour, uint8_t minute, uint8_t second);
+HAL_StatusTypeDef setDate(uint8_t year, uint8_t month, uint8_t weekday, uint8_t date);
+HAL_StatusTypeDef getTimeDate(char* time, char* date, struct time_date_DataDigital* dTime);
 
-  uint8_t day, weekday, month, year;
-} TD_data;
+void set_tube_numbers(struct time_date_DataDigital* _time_date_data);
+uint16_t combine_4bit_numbers(uint8_t num0, uint8_t num1, uint8_t num2, uint8_t num3);
 
 /**
  * main counter for getTick function
@@ -133,6 +155,7 @@ struct time_date_DataDigital {
 uint32_t start_ms_counter = 0;
 
 uint8_t error_count = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -141,13 +164,6 @@ static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_RTC_Init(void);
 /* USER CODE BEGIN PFP */
-
-HAL_StatusTypeDef setTime(uint8_t hour, uint8_t minute, uint8_t second);
-HAL_StatusTypeDef setDate(uint8_t year, uint8_t month, uint8_t weekday, uint8_t date);
-HAL_StatusTypeDef getTimeDate(char* time, char* date, struct time_date_DataDigital* dTime);
-
-void set_tube_numbers(struct time_date_DataDigital* _time_date_data);
-uint16_t combine_4bit_numbers(uint8_t num0, uint8_t num1, uint8_t num2, uint8_t num3);
 
 #if DEBUG_DISPLAY
 void ssd1306_writeTime(char* time);
