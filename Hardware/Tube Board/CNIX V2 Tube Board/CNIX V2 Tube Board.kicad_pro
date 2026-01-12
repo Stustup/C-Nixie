@@ -643,10 +643,10 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "../../../Production/CNIX Tube Board/",
+      "plot": "../../../Production/CNIX Tube Board Gerbers/IN4 V2 - FIXED/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "3D-Model/Nixie Clock Tube Board V2.step",
+      "step": "../../../CAD/Nixie Clock Tube Board V2 IN4.step",
       "svg": "exports/",
       "vrml": ""
     },

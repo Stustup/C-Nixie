@@ -118,7 +118,7 @@
 			(mirror no)
 			(drillshape 0)
 			(scaleselection 1)
-			(outputdirectory "../../../Production/CNIX Tube Board/")
+			(outputdirectory "../../../Production/CNIX Tube Board Gerbers/IN4 V2 - FIXED/")
 		)
 	)
 	(net 0 "")
