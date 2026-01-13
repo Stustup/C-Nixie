@@ -24,6 +24,8 @@
   * //TODO: Implement indicator LEDS on the front and their function
   * //TODO: Implement manual time setting via buttons
   * //TODO: Implement On/Off automatic
+  * //TODO: Implement ID system for submodules
+  * //TODO: Implement DCF77 Code
  */
 
 /* USER CODE END Header */
@@ -45,6 +47,7 @@
 #include "ssd1306.h"
 #include "output_tube.h"
 #include "menu.h"
+#include "stm32g0xx_hal_tim.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -122,8 +125,10 @@ I2C_HandleTypeDef hi2c1;
 
 RTC_HandleTypeDef hrtc;
 
+TIM_HandleTypeDef htim1;
+
 /* USER CODE BEGIN PV */
-volatile uint8_t update_flag = isNotSet;
+volatile uint8_t tick_flag = isNotSet;
 
 /**
  * Value of the button being pressed.
@@ -131,7 +136,14 @@ volatile uint8_t update_flag = isNotSet;
  * 2: MENU
  * 3: PLUS
  */
-volatile int8_t btn_flag = 0;
+volatile int8_t btn_flag_menu  = 0;
+volatile int8_t btn_flag_plus  = 0;
+volatile int8_t btn_flag_minus = 0;
+
+//used for blinking the screen when in menu. Set to DISPLAY_BLINK_TIME
+volatile uint8_t tick_blink = 0;
+uint8_t tick_blink_flag = 0;
+
 uint8_t btn_pressed_flag = isNotPressed;
 
 #if DEBUG_DISPLAY
@@ -148,12 +160,15 @@ HAL_StatusTypeDef getTimeDate(char* time, char* date, struct time_date_DataDigit
 
 void set_tube_numbers(struct time_date_DataDigital* _time_date_data);
 uint16_t combine_4bit_numbers(uint8_t num0, uint8_t num1, uint8_t num2, uint8_t num3);
+void output_to_tubes(uint16_t _data);
+
+void output_front_led(uint8_t led0, uint8_t led1);
 
 /**
  * main counter for getTick function
  */
 uint32_t start_ms_counter = 0;
-
+uint32_t start_ms_counter_blink = 0;
 uint8_t error_count = 0;
 
 /* USER CODE END PV */
@@ -163,6 +178,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_RTC_Init(void);
+static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
 
 #if DEBUG_DISPLAY
@@ -210,8 +226,10 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   MX_RTC_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
+  HAL_TIM_Base_Start_IT(&htim1);
 
   //Initialize the RTC
   HAL_RTC_Init(&hrtc);
@@ -236,10 +254,9 @@ int main(void)
   }
 
   //Set the Front LEDs On
-  GPIOA->BSRR = GPIO_BSRR_BS11;
-  GPIOA->BSRR = GPIO_BSRR_BS12;
+  output_front_led(1, 1);
 
-
+  //Output current time to tubes
   set_tube_numbers(&TD_data);
   
   #if DEBUG_DISPLAY
@@ -262,7 +279,7 @@ int main(void)
   ssd1306_writeDate(dateData);
   ssd1306_SetCursor(0, 22);
   ssd1306_WriteString("Button pressed: ", Font_7x10, White);
-  ssd1306_writeMisc(0);
+  ssd1306_writeMisc('0');
   ssd1306_UpdateScreen();
   #endif
 
@@ -272,7 +289,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    if(update_flag == isSet) { //flag set by interrupt by RTC on 1Hz
+    if(tick_flag == isSet) { //flag set by interrupt by RTC on 1Hz
 
       getTimeDate(timeData, dateData, &TD_data);      //Get tiome from RTC registers
 
@@ -285,15 +302,19 @@ int main(void)
         set_tube_numbers(&TD_data);
       }
 
-      update_flag = reset; //reset update flag
+      tick_flag = reset; //reset update flag
     }
 
     /**
      * Main switch case for the buttons 
      */
-    if(btn_flag != isNotPressed) {
-      ssd1306_writeMisc(btn_flag);
+    if((btn_flag_plus = isPressed) || (btn_flag_menu = isPressed) || (btn_flag_minus = isPressed)) {
+      
+      if(btn_flag_menu)  ssd1306_writeMisc('M');
+      if(btn_flag_plus)  ssd1306_writeMisc('+');
+      if(btn_flag_minus) ssd1306_writeMisc('-');
 
+      /*Turns on the HT PSU
       switch (btn_flag) {
         case 2:
 
@@ -302,24 +323,27 @@ int main(void)
 
         default:
           break;
-      }
+      } */
 
       start_ms_counter = HAL_GetTick();
       btn_pressed_flag = isPressed;
-      btn_flag = false;
+
+      btn_flag_menu =  reset;
+      btn_flag_minus = reset;
+      btn_flag_plus =  reset;
     }
 
     /**
      * Reset button number after some time (defined in DISPLAY_MENU_RESET_TIME)
      */
-    if(btn_pressed_flag == isPressed) {
+    if(btn_pressed_flag && ((HAL_GetTick()-start_ms_counter) > DISPLAY_MENU_RESET_TIME)) {
 
-      if((HAL_GetTick()-start_ms_counter) > DISPLAY_MENU_RESET_TIME) {
-        ssd1306_writeMisc(0);
-        btn_pressed_flag = isNotPressed;
-      }
+      ssd1306_writeMisc('0');
+      btn_pressed_flag = isNotPressed;
     }
 
+    if(tick_blink_flag) output_front_led(tick_blink, tick_blink);
+    
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -439,7 +463,8 @@ static void MX_RTC_Init(void)
 
   /* USER CODE END RTC_Init 0 */
 
-
+  RTC_TimeTypeDef sTime = {0};
+  RTC_DateTypeDef sDate = {0};
   RTC_AlarmTypeDef sAlarm = {0};
 
   /* USER CODE BEGIN RTC_Init 1 */
@@ -467,7 +492,8 @@ static void MX_RTC_Init(void)
   /* USER CODE END Check_RTC_BKUP */
 
   /** Initialize RTC and set the Time and Date
-  
+  */
+ /*
   sTime.Hours = 0x14;
   sTime.Minutes = 0x10;
   sTime.Seconds = 0x0;
@@ -487,7 +513,6 @@ static void MX_RTC_Init(void)
   {
     Error_Handler();
   }
-
   */
 
   /** Enable the Alarm A
@@ -528,6 +553,53 @@ static void MX_RTC_Init(void)
 }
 
 /**
+  * @brief TIM1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM1_Init(void)
+{
+
+  /* USER CODE BEGIN TIM1_Init 0 */
+
+  /* USER CODE END TIM1_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM1_Init 1 */
+
+  /* USER CODE END TIM1_Init 1 */
+  htim1.Instance = TIM1;
+  htim1.Init.Prescaler = 1000;
+  htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim1.Init.Period = 24000;
+  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim1.Init.RepetitionCounter = 0;
+  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterOutputTrigger2 = TIM_TRGO2_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM1_Init 2 */
+
+  /* USER CODE END TIM1_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -543,6 +615,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, ht_EN_Pin|pwr_led_Pin, GPIO_PIN_SET);
@@ -588,6 +661,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : id_bit0_Pin id_bit1_Pin */
+  GPIO_InitStruct.Pin = id_bit0_Pin|id_bit1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI4_15_IRQn, 0, 0);
@@ -712,17 +791,16 @@ void ssd1306_writeDate(char* date) {
   ssd1306_UpdateScreen();
 }
 
-void ssd1306_writeMisc(int8_t data) {
-  char bufnum[2];
-  sprintf(bufnum, "%d", btn_flag);
+void ssd1306_writeMisc(int8_t _data) {
+  char buffer[1] = {_data};
   ssd1306_SetCursor(DISPLAY_MISC_X_OFFSET, DISPLAY_MISC_Y_OFFSET);
-  ssd1306_WriteString(bufnum, Font_7x10, White);
+  ssd1306_WriteString(buffer, Font_7x10, White);
   ssd1306_UpdateScreen();
 }
 
 //Interrupt for triggering an update event every second
 void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc) {
-  update_flag = set;
+  tick_flag = set;
 }
 
 /** Function for changing the tubes to the corresponding time values
@@ -749,16 +827,16 @@ void set_tube_numbers(struct time_date_DataDigital* _time_date_data) {
   */
 
   //Use variable in between the output and the bit sets for easy debugging. Speed does'nt matter
-  uint16_t _timeData_port_temp = combine_4bit_numbers(hours_tens, hours_ones, minutes_tens, minutes_ones);
+  //uint16_t _timeData_port_temp = combine_4bit_numbers(hours_tens, hours_ones, minutes_tens, minutes_ones);
   
-  //Output on the whole PORTB via the ODR (Output Data Register)
-  GPIOB->ODR = _timeData_port_temp;
+  //Outputs 16bit data to the whole Port B of the micro. 
+  output_to_tubes(combine_4bit_numbers(hours_tens, hours_ones, minutes_tens, minutes_ones));
 
   return;
 }
 
 /**
- * Sorts the bits to the correct spot for the output register 
+ * Sorts the bits to the correct spot for the output register TODO: Update PCB next time to have a nicer output register format not needing this shit -_-
  */
 uint16_t combine_4bit_numbers(uint8_t num0, uint8_t num1, uint8_t num2, uint8_t num3) {
 
@@ -801,21 +879,45 @@ uint16_t combine_4bit_numbers(uint8_t num0, uint8_t num1, uint8_t num2, uint8_t 
 
 }
 
+void output_to_tubes(uint16_t _data) {
+  //Output on the whole PORTB via the ODR (Output Data Register)
+  GPIOB->ODR = _data;
+}
+
+/**
+ * @brief: Function to manipulate the front leds.
+ * @param led0: top led
+ * @param led1: bottom led
+ * @param led_status: 0->off; 1->on
+ */
+void output_front_led(uint8_t led0, uint8_t led1) {
+
+  if(led0)  GPIOA->BSRR = GPIO_BSRR_BS11;
+  if(!led0) GPIOA->BSRR = GPIO_BSRR_BR11;
+
+  if(led1)  GPIOA->BSRR = GPIO_BSRR_BS12;
+  if(!led1) GPIOA->BSRR = GPIO_BSRR_BR12;
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+  tick_blink = !tick_blink;
+}
+
 /**
  * Interrupt Handler for the buttons
  */
 void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin) {
   switch(GPIO_Pin) {
     case btn_plus_Pin:
-      btn_flag = 3;
+      btn_flag_plus = 1;
       break;
     
     case btn_minus_Pin:
-      btn_flag = 1;
+      btn_flag_minus = 1;
       break;
 
     case btn_menu_Pin:
-      btn_flag = 2;
+      btn_flag_menu = 1;
       break;
 
     default:

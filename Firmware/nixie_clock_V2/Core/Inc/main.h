@@ -92,6 +92,10 @@ void Error_Handler(void);
 #define led_sig_top_GPIO_Port GPIOA
 #define pwr_led_Pin GPIO_PIN_15
 #define pwr_led_GPIO_Port GPIOA
+#define id_bit0_Pin GPIO_PIN_2
+#define id_bit0_GPIO_Port GPIOD
+#define id_bit1_Pin GPIO_PIN_3
+#define id_bit1_GPIO_Port GPIOD
 #define co2_1_Pin GPIO_PIN_3
 #define co2_1_GPIO_Port GPIOB
 #define co2_2_Pin GPIO_PIN_4

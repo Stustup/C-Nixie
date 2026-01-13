@@ -13,3 +13,6 @@
 *.net
 *-cache.lib
 *-rescue.lib
+
+# Backup and old Version folders in Projects
+Backup
