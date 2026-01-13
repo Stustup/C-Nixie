@@ -7,7 +7,7 @@
 	(title_block
 		(title "Nixie Tube Clock")
 		(date "2024-10-17")
-		(rev "2.0")
+		(rev "2.2.0")
 		(company "C-Audio")
 	)
 	(lib_symbols
@@ -10235,7 +10235,7 @@
 		)
 		(uuid "31245f79-6eaf-44c8-a8a0-74709e0ffdaa")
 	)
-	(label "PD2"
+	(label "id_bit0"
 		(at 49.53 66.04 0)
 		(effects
 			(font
@@ -10545,7 +10545,7 @@
 		)
 		(uuid "8e933cf2-97c6-43e7-b40f-4b61689d7f15")
 	)
-	(label "PD3"
+	(label "id_bit1"
 		(at 49.53 68.58 0)
 		(effects
 			(font
@@ -18311,7 +18311,7 @@
 				)
 			)
 		)
-		(property "Value" "AMS1117-3.3"
+		(property "Value" "AP7361C-33ER-13"
 			(at 186.69 86.36 0)
 			(effects
 				(font
@@ -18328,7 +18328,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "http://www.advanced-monolithic.com/pdf/ds1117.pdf"
+		(property "Datasheet" "https://www.mouser.de/datasheet/3/175/1/AP7361C.pdf"
 			(at 189.23 96.52 0)
 			(effects
 				(font
@@ -18337,7 +18337,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223"
+		(property "Description" "The AP7361C is a 1A, adjustable and fixed output voltage, ultra-low dropout linear regulator with enable. The device includes pass element, error amplifier, band-gap reference, current limit and thermal shutdown circuitry. The device is turned on when EN pin is set to logic high level."
 			(at 186.69 90.17 0)
 			(effects
 				(font
@@ -18346,12 +18346,13 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser-Nr." ""
+		(property "Mouser-Nr." "621-AP7361C-33ER-13 "
 			(at 186.69 90.17 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Reichelt-Nr." ""
@@ -18360,6 +18361,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(pin "3"

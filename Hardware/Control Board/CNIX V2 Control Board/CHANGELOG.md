@@ -11,3 +11,6 @@
 
 ### V2.1.1
 - Fixed CR2025 label
+
+### V2.2.0
+- Added detection for addon modules via pins D2 and D3 (2 bit). DCF77 board has the id 0x0
