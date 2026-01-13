@@ -7,6 +7,12 @@
 		(legacy_teardrops no)
 	)
 	(paper "A4")
+	(title_block
+		(title "Nixie Tube Control Board")
+		(date "2026-01-13")
+		(rev "V2.1.1")
+		(company "C-Audio")
+	)
 	(layers
 		(0 "F.Cu" signal)
 		(2 "B.Cu" mixed)
@@ -30178,7 +30184,7 @@
 			(justify left bottom)
 		)
 	)
-	(gr_text "CR2021 Coin Cell"
+	(gr_text "CR2025 Coin Cell"
 		(at 204.711051 129.531051 0)
 		(layer "F.SilkS" knockout)
 		(uuid "fa76fb72-a398-45a8-b863-6a53fa7cb994")
