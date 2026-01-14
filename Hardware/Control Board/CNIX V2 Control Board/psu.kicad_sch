@@ -11,6 +11,169 @@
 		(company "C-Audio")
 	)
 	(lib_symbols
+		(symbol "Connector:Conn_01x02_Pin"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x02_Pin"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x02, script generated"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_locked" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x02_Pin_1_1"
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 0.8636 0)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector:TestPoint_Small"
 			(pin_numbers
 				(hide yes)
@@ -2283,7 +2446,7 @@
 		(uuid "1ce1ccc8-af12-48a3-abc2-600cd5831d90")
 	)
 	(junction
-		(at 76.2 97.79)
+		(at 55.88 97.79)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "1fc48d8c-833f-4cf1-8f15-f9a7add779ac")
@@ -2500,6 +2663,16 @@
 	)
 	(wire
 		(pts
+			(xy 67.31 97.79) (xy 77.47 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "00f815ca-aff0-4359-871b-984d744e9225")
+	)
+	(wire
+		(pts
 			(xy 207.01 80.01) (xy 210.82 80.01)
 		)
 		(stroke
@@ -2580,7 +2753,7 @@
 	)
 	(wire
 		(pts
-			(xy 76.2 104.14) (xy 76.2 105.41)
+			(xy 55.88 104.14) (xy 55.88 105.41)
 		)
 		(stroke
 			(width 0)
@@ -2600,7 +2773,7 @@
 	)
 	(wire
 		(pts
-			(xy 76.2 97.79) (xy 77.47 97.79)
+			(xy 55.88 97.79) (xy 64.77 97.79)
 		)
 		(stroke
 			(width 0)
@@ -3380,7 +3553,7 @@
 	)
 	(wire
 		(pts
-			(xy 76.2 110.49) (xy 76.2 111.76)
+			(xy 55.88 110.49) (xy 55.88 111.76)
 		)
 		(stroke
 			(width 0)
@@ -3560,7 +3733,7 @@
 	)
 	(wire
 		(pts
-			(xy 74.93 97.79) (xy 76.2 97.79)
+			(xy 54.61 97.79) (xy 55.88 97.79)
 		)
 		(stroke
 			(width 0)
@@ -3660,7 +3833,7 @@
 	)
 	(wire
 		(pts
-			(xy 76.2 97.79) (xy 76.2 99.06)
+			(xy 55.88 97.79) (xy 55.88 99.06)
 		)
 		(stroke
 			(width 0)
@@ -3820,9 +3993,9 @@
 		)
 		(uuid "2cfa1405-0eaf-4c54-8d3e-22b98d8e56cf")
 	)
-	(hierarchical_label "EN"
+	(hierarchical_label "~{EN}"
 		(shape input)
-		(at 74.93 97.79 180)
+		(at 54.61 97.79 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4020,7 +4193,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED_Small")
-		(at 76.2 101.6 90)
+		(at 55.88 101.6 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4028,7 +4201,7 @@
 		(dnp no)
 		(uuid "112ed3c4-1b2c-4c4d-b59b-384298997905")
 		(property "Reference" "D103"
-			(at 68.834 100.33 90)
+			(at 48.514 100.33 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4037,7 +4210,7 @@
 			)
 		)
 		(property "Value" "LED_G"
-			(at 68.834 102.87 90)
+			(at 48.514 102.87 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4046,7 +4219,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
-			(at 76.2 101.6 90)
+			(at 55.88 101.6 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4055,7 +4228,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 76.2 101.6 90)
+			(at 55.88 101.6 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4064,7 +4237,7 @@
 			)
 		)
 		(property "Description" "Light emitting diode, small symbol"
-			(at 76.2 101.6 0)
+			(at 55.88 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4073,7 +4246,7 @@
 			)
 		)
 		(property "Mouser URL" ""
-			(at 76.2 101.6 0)
+			(at 55.88 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4082,7 +4255,7 @@
 			)
 		)
 		(property "Mouser Nr." ""
-			(at 76.2 101.6 0)
+			(at 55.88 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4091,7 +4264,7 @@
 			)
 		)
 		(property "Mouser-Nr." ""
-			(at 76.2 101.6 0)
+			(at 55.88 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4099,7 +4272,7 @@
 			)
 		)
 		(property "Reichelt-Nr." ""
-			(at 76.2 101.6 0)
+			(at 55.88 101.6 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4372,7 +4545,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 76.2 111.76 0)
+		(at 55.88 111.76 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4380,7 +4553,7 @@
 		(dnp no)
 		(uuid "1780f894-c538-4c55-bd85-292df343bcc0")
 		(property "Reference" "#PWR0119"
-			(at 76.2 118.11 0)
+			(at 55.88 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4389,7 +4562,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 73.406 114.554 0)
+			(at 53.086 114.554 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4397,7 +4570,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 76.2 111.76 0)
+			(at 55.88 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4406,7 +4579,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 76.2 111.76 0)
+			(at 55.88 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4415,7 +4588,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 76.2 111.76 0)
+			(at 55.88 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5776,6 +5949,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:Conn_01x02_Pin")
+		(at 67.31 92.71 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5291c95e-06d6-402b-a87f-67d5134bf66e")
+		(property "Reference" "J100"
+			(at 68.58 92.0749 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "HT_en"
+			(at 68.58 94.6149 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
+			(at 67.31 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 67.31 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated"
+			(at 67.31 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "c5513d4e-f5f2-4634-a653-84628f0a93dd")
+		)
+		(pin "1"
+			(uuid "33e7cc8e-d5d4-49b9-ace8-b6637f412c8d")
+		)
+		(instances
+			(project ""
+				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
+					(reference "J100")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 175.26 105.41 0)
 		(unit 1)
@@ -6072,7 +6315,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 76.2 107.95 180)
+		(at 55.88 107.95 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6080,7 +6323,7 @@
 		(dnp no)
 		(uuid "5c55a2ba-3fa1-4927-b287-33a9c921e643")
 		(property "Reference" "R113"
-			(at 72.263 107.061 0)
+			(at 51.943 107.061 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6088,7 +6331,7 @@
 			)
 		)
 		(property "Value" "1k"
-			(at 72.136 109.22 0)
+			(at 51.816 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6096,7 +6339,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 76.2 107.95 0)
+			(at 55.88 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6105,7 +6348,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 76.2 107.95 0)
+			(at 55.88 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6114,7 +6357,7 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
-			(at 76.2 107.95 0)
+			(at 55.88 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6123,7 +6366,7 @@
 			)
 		)
 		(property "Mouser-Nr." ""
-			(at 76.2 107.95 0)
+			(at 55.88 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6131,7 +6374,7 @@
 			)
 		)
 		(property "Reichelt-Nr." ""
-			(at 76.2 107.95 0)
+			(at 55.88 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)

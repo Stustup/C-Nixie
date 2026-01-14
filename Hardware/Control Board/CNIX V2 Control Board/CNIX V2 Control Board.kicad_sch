@@ -10115,6 +10115,16 @@
 		)
 		(uuid "0c9c65ae-081c-4145-9be4-63bf6bf97de7")
 	)
+	(label "~{EN}"
+		(at 101.6 45.72 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0e3da29a-b129-4a54-b664-dc5275ac7971")
+	)
 	(label "CO1_0"
 		(at 166.37 57.15 0)
 		(effects
@@ -10315,16 +10325,6 @@
 		)
 		(uuid "4ad8c85a-8f84-4226-be0f-5e842129f693")
 	)
-	(label "EN"
-		(at 101.6 45.72 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4b1df38b-ac9b-4298-9667-6c35fd11853e")
-	)
 	(label "CO2_3"
 		(at 99.06 101.6 180)
 		(effects
@@ -10335,7 +10335,7 @@
 		)
 		(uuid "4be7ffec-53da-4f18-a9d6-58d0b3b714e5")
 	)
-	(label "EN"
+	(label "~{EN}"
 		(at 224.79 96.52 0)
 		(effects
 			(font
@@ -20651,9 +20651,9 @@
 				(justify right)
 			)
 		)
-		(pin "EN" input
+		(pin "~{EN}" input
 			(at 228.6 96.52 180)
-			(uuid "3e5912cd-a703-469f-91c3-d2b4ece2fd80")
+			(uuid "1a87f08d-d76b-4329-bdf6-71e83af47749")
 			(effects
 				(font
 					(size 1.27 1.27)
