@@ -59,15 +59,17 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define ht_EN_Pin GPIO_PIN_0
 #define ht_EN_GPIO_Port GPIOA
-#define btn_plus_Pin GPIO_PIN_5
-#define btn_plus_GPIO_Port GPIOA
-#define btn_plus_EXTI_IRQn EXTI4_15_IRQn
+#define dht22_pin_Pin GPIO_PIN_1
+#define dht22_pin_GPIO_Port GPIOA
+#define btn_minus_Pin GPIO_PIN_5
+#define btn_minus_GPIO_Port GPIOA
+#define btn_minus_EXTI_IRQn EXTI4_15_IRQn
 #define btn_menu_Pin GPIO_PIN_6
 #define btn_menu_GPIO_Port GPIOA
 #define btn_menu_EXTI_IRQn EXTI4_15_IRQn
-#define btn_minus_Pin GPIO_PIN_7
-#define btn_minus_GPIO_Port GPIOA
-#define btn_minus_EXTI_IRQn EXTI4_15_IRQn
+#define btn_plus_Pin GPIO_PIN_7
+#define btn_plus_GPIO_Port GPIOA
+#define btn_plus_EXTI_IRQn EXTI4_15_IRQn
 #define co1_3_Pin GPIO_PIN_0
 #define co1_3_GPIO_Port GPIOB
 #define co1_2_Pin GPIO_PIN_1

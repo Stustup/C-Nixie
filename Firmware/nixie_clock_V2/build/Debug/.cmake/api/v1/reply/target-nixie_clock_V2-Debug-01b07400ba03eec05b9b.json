@@ -50,7 +50,7 @@
 			{
 				"command" : 3,
 				"file" : 0,
-				"line" : 54,
+				"line" : 56,
 				"parent" : 0
 			},
 			{
@@ -98,6 +98,10 @@
 					"path" : "/home/nielscron/Dokumente/DIY/Projects New/C-Nixie_CNIX/Firmware/nixie_clock_V2/Drivers/ssd1306"
 				},
 				{
+					"backtrace" : 5,
+					"path" : "/home/nielscron/Dokumente/DIY/Projects New/C-Nixie_CNIX/Firmware/nixie_clock_V2/Drivers/DHT22"
+				},
+				{
 					"backtrace" : 4,
 					"path" : "/home/nielscron/Dokumente/DIY/Projects New/C-Nixie_CNIX/Firmware/nixie_clock_V2/cmake/stm32cubemx/../../Core/Inc"
 				},
@@ -135,7 +139,8 @@
 				3,
 				4,
 				6,
-				7
+				7,
+				8
 			]
 		},
 		{
@@ -165,6 +170,10 @@
 				{
 					"backtrace" : 5,
 					"path" : "/home/nielscron/Dokumente/DIY/Projects New/C-Nixie_CNIX/Firmware/nixie_clock_V2/Drivers/ssd1306"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/home/nielscron/Dokumente/DIY/Projects New/C-Nixie_CNIX/Firmware/nixie_clock_V2/Drivers/DHT22"
 				},
 				{
 					"backtrace" : 4,
@@ -246,7 +255,8 @@
 				3,
 				4,
 				6,
-				7
+				7,
+				8
 			]
 		},
 		{
@@ -260,7 +270,6 @@
 			"name" : "Object Libraries",
 			"sourceIndexes" : 
 			[
-				8,
 				9,
 				10,
 				11,
@@ -279,7 +288,8 @@
 				24,
 				25,
 				26,
-				27
+				27,
+				28
 			]
 		}
 	],
@@ -331,6 +341,12 @@
 			"backtrace" : 7,
 			"compileGroupIndex" : 0,
 			"path" : "Drivers/ssd1306/ssd1306_fonts.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 7,
+			"compileGroupIndex" : 0,
+			"path" : "Drivers/DHT22/dht22.c",
 			"sourceGroupIndex" : 0
 		},
 		{

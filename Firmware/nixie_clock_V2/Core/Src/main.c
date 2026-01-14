@@ -34,6 +34,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "cmsis_gcc.h"
 #include "ssd1306_fonts.h"
 #include "stm32g051xx.h"
 #include "stm32g0xx_hal.h"
@@ -48,6 +49,7 @@
 #include "output_tube.h"
 #include "menu.h"
 #include "stm32g0xx_hal_tim.h"
+#include "dht22.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -92,7 +94,15 @@ struct time_date_DataDigital {
 #define CURRENT_DATE_DAY     16
 #define CURRENT_DATE_WEEKDAY  2
 
-#define DISPLAY_MENU_RESET_TIME 1000
+//Interval in which the time updates. 1s for oled screen and second accuracy, 60 for nixie display
+#define UPDATE_INTERVAL 60  
+
+//Reset time for the display of the menu button on the oled
+#define DISPLAY_MENU_RESET_TIME 750
+
+//Timeouts for the menus. 10s for temp and hmd, 60s for everything else
+#define DISPLAY_MENU_1_TIMEOUT 10000
+#define DISPLAY_MENU_X_TIMEOUT 60000
 
 #define set 1
 #define true 1
@@ -106,16 +116,17 @@ struct time_date_DataDigital {
 
 //--------------------------------------------------------- Menu stuff makros and variables
 
-#define menu_size 4
+#define menu_size 8
 
 /**
  * @brief: Main menu structure for the whole clock
  * @param 0 -> normal time display
  * @param 1 -> Temperature and humidity sensor (Timeout 5s)
- * @param 2 -> time set (GETS DISABLED WHEN DCF77 PLUGIN BOARD ARE USED) (1. hours tens; 2. hours ones; 3. minutes tens; 4. minutes ones) (Timeout 30s)
- * @param 3 -> Start/stop Time (time setting like above, but for start AND stop time) (Maybe multiple ones for morning and evening times?) (Timeout 30s) (Override with long press till next shutoff?)
+ * @param 2 -> Start/stop Time (time setting like above, but for start AND stop time) (Maybe multiple ones for morning and evening times?) (Timeout 30s) (Override with long press till next shutoff?)
+ * @param 3 -> Time set (GETS DISABLED WHEN DCF77 PLUGIN BOARD ARE USED) (1. hours tens; 2. hours ones; 3. minutes tens; 4. minutes ones) (Timeout 30s)
  */
-uint8_t menu[menu_size] = {0,1,2,3};
+uint8_t menu_pos = 0;
+uint8_t menu_pos_old = 0;
 
 uint16_t menu_time_set[4] = {1010,110,101,11};
 /* USER CODE END PM */
@@ -129,6 +140,7 @@ TIM_HandleTypeDef htim1;
 
 /* USER CODE BEGIN PV */
 volatile uint8_t tick_flag = isNotSet;
+volatile uint8_t counter_seconds = 0;
 
 /**
  * Value of the button being pressed.
@@ -146,13 +158,21 @@ uint8_t tick_blink_flag = 0;
 
 uint8_t btn_pressed_flag = isNotPressed;
 
+//for when the sensor is being used
+volatile uint8_t sensor_flag = 0;
+
+uint8_t id_read = 0b0011;
+
 #if DEBUG_DISPLAY
 /**
  * Char arrays to use strings directly on oled, could be omitted on final device.
  */
 char timeData[15];
 char dateData[15];
+char miscData[2];
 #endif
+
+uint8_t check_if_addon();
 
 HAL_StatusTypeDef setTime(uint8_t hour, uint8_t minute, uint8_t second);
 HAL_StatusTypeDef setDate(uint8_t year, uint8_t month, uint8_t weekday, uint8_t date);
@@ -163,13 +183,20 @@ uint16_t combine_4bit_numbers(uint8_t num0, uint8_t num1, uint8_t num2, uint8_t 
 void output_to_tubes(uint16_t _data);
 
 void output_front_led(uint8_t led0, uint8_t led1);
+void output_blink_front_leds(uint8_t _mode);
+
+void menu1();
+void menu_startStop();
+void menu_timeSet();
+void menu_timeout(uint8_t _menu_pos);
 
 /**
  * main counter for getTick function
  */
 uint32_t start_ms_counter = 0;
 uint32_t start_ms_counter_blink = 0;
-uint8_t error_count = 0;
+uint32_t start_ms_counter_menuTimeout = 0;
+uint8_t  error_count = 0;
 
 /* USER CODE END PV */
 
@@ -185,7 +212,7 @@ static void MX_TIM1_Init(void);
 void ssd1306_writeTime(char* time);
 void ssd1306_writeDate(char* date);
 void ssd1306_writeTimeDate(char* time, char* date);
-void ssd1306_writeMisc(int8_t data);
+void ssd1306_writeMisc(char* _data);
 #endif
 
 /* USER CODE END PFP */
@@ -243,6 +270,7 @@ int main(void)
     setDate(CURRENT_DATE_YEAR, CURRENT_DATE_MONTH, CURRENT_DATE_WEEKDAY, CURRENT_DATE_DAY);
   }
   
+  __disable_irq();
   //Try 10 times or till a HAL_OK is retrieved to get the time from RTC
   if(getTimeDate(timeData, dateData, &TD_data) != HAL_OK) {
     HAL_StatusTypeDef _Status = HAL_ERROR;
@@ -252,6 +280,7 @@ int main(void)
       tries++;
     }
   }
+  __enable_irq();
 
   //Set the Front LEDs On
   output_front_led(1, 1);
@@ -278,10 +307,14 @@ int main(void)
   ssd1306_WriteString("Date: ", Font_7x10, White);
   ssd1306_writeDate(dateData);
   ssd1306_SetCursor(0, 22);
-  ssd1306_WriteString("Button pressed: ", Font_7x10, White);
-  ssd1306_writeMisc('0');
+  ssd1306_WriteString("Menu Position: ", Font_7x10, White);
+  miscData[0] = '0';
+  ssd1306_writeMisc(miscData);
   ssd1306_UpdateScreen();
   #endif
+
+  //check for installed submodules
+  id_read = check_if_addon();
 
   /* USER CODE END 2 */
 
@@ -302,18 +335,103 @@ int main(void)
         set_tube_numbers(&TD_data);
       }
 
+      if(menu_pos == 1) {
+        counter_seconds++;
+        if(counter_seconds >=4) {
+          sensor_flag = 1;
+          counter_seconds = 0;
+        }
+      }
+
       tick_flag = reset; //reset update flag
     }
 
     /**
-     * Main switch case for the buttons 
+     * Reset button number after some time (defined in DISPLAY_MENU_RESET_TIME)
      */
-    if((btn_flag_plus = isPressed) || (btn_flag_menu = isPressed) || (btn_flag_minus = isPressed)) {
-      
-      if(btn_flag_menu)  ssd1306_writeMisc('M');
-      if(btn_flag_plus)  ssd1306_writeMisc('+');
-      if(btn_flag_minus) ssd1306_writeMisc('-');
+    if(btn_pressed_flag && ((HAL_GetTick()-start_ms_counter) > DISPLAY_MENU_RESET_TIME)) {
 
+      miscData[0] = '0';
+      ssd1306_writeMisc(miscData);
+      btn_pressed_flag = isNotPressed;
+    }
+
+    //only start one time per menu change
+    if(menu_pos != menu_pos_old)  { 
+      start_ms_counter_menuTimeout = HAL_GetTick();
+      menu_pos_old = menu_pos;
+    }
+    
+    //If menu_pos is other than normal time setting (=0), go into this MAIN MENU STRUCTURE
+    if(menu_pos != 0) {
+
+      switch(menu_pos) {
+        case 1: //Display Temp and Hmd on nixie tubes. Left Temp, right hmd. TIMEOUT = 10s
+          if(id_read != 0x0) {
+            menu_pos++;
+            break;  //Skips this menu when no DCF77 addon board is connected
+          }
+          
+          menu_timeout(1);
+          menu1();
+          output_blink_front_leds(0);
+
+          break; 
+
+        case 2: case 3: //Set start time of the clock. Can be set multiple times for a morning and evening routine TIMEOUT = 60s         
+          menu_timeout(2);
+          menu_startStop();
+          output_blink_front_leds(2);
+          
+          break;  
+
+        case 4: case 5: //Set stop time of the clock.
+          menu_timeout(2);
+          menu_startStop();
+          output_blink_front_leds(3);
+
+          break;
+
+        case 6: case 7: //Set the time manually. must be disabled when module '00' is used (DCF77) TIMEOUT = 60s   
+          menu_timeout(3);
+          menu_timeSet();
+          output_blink_front_leds(1);
+          break;
+
+        default: break;
+      }
+
+      btn_flag_menu =  reset;
+      btn_flag_minus = reset;
+      btn_flag_plus =  reset;   
+    } else if(menu_pos == 0) output_front_led(1, 1);
+    
+    #ifdef DEBUG
+    sprintf(miscData, "%01d", menu_pos);
+    ssd1306_writeMisc(miscData);
+    #endif
+    
+    /**
+     * Debug function for development of the buttons
+     */
+    /*
+    if((btn_flag_plus == isPressed) || (btn_flag_menu == isPressed) || (btn_flag_minus == isPressed)) {
+
+      if(btn_flag_menu) {
+        miscData[0] = 'M';
+        ssd1306_writeMisc(miscData);
+      }
+      if(btn_flag_plus) {
+        miscData[0] = '+';
+        ssd1306_writeMisc(miscData);
+      }
+      if(btn_flag_minus) {
+        miscData[0] = '-';
+        ssd1306_writeMisc(miscData);
+      }
+      */
+      
+      
       /*Turns on the HT PSU
       switch (btn_flag) {
         case 2:
@@ -325,25 +443,14 @@ int main(void)
           break;
       } */
 
-      start_ms_counter = HAL_GetTick();
-      btn_pressed_flag = isPressed;
-
+      //start_ms_counter = HAL_GetTick();
+      //btn_pressed_flag = isPressed;
+      /*
       btn_flag_menu =  reset;
       btn_flag_minus = reset;
       btn_flag_plus =  reset;
     }
-
-    /**
-     * Reset button number after some time (defined in DISPLAY_MENU_RESET_TIME)
-     */
-    if(btn_pressed_flag && ((HAL_GetTick()-start_ms_counter) > DISPLAY_MENU_RESET_TIME)) {
-
-      ssd1306_writeMisc('0');
-      btn_pressed_flag = isNotPressed;
-    }
-
-    if(tick_blink_flag) output_front_led(tick_blink, tick_blink);
-    
+    */
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -463,8 +570,8 @@ static void MX_RTC_Init(void)
 
   /* USER CODE END RTC_Init 0 */
 
-  RTC_TimeTypeDef sTime = {0};
-  RTC_DateTypeDef sDate = {0};
+  //RTC_TimeTypeDef sTime = {0};
+  //RTC_DateTypeDef sDate = {0};
   RTC_AlarmTypeDef sAlarm = {0};
 
   /* USER CODE BEGIN RTC_Init 1 */
@@ -493,7 +600,7 @@ static void MX_RTC_Init(void)
 
   /** Initialize RTC and set the Time and Date
   */
- /*
+  /*
   sTime.Hours = 0x14;
   sTime.Minutes = 0x10;
   sTime.Seconds = 0x0;
@@ -508,6 +615,7 @@ static void MX_RTC_Init(void)
   sDate.Month = RTC_MONTH_OCTOBER;
   sDate.Date = 0x15;
   sDate.Year = 0x0;
+  
 
   if (HAL_RTC_SetDate(&hrtc, &sDate, RTC_FORMAT_BCD) != HAL_OK)
   {
@@ -636,8 +744,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(ht_EN_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : btn_plus_Pin btn_menu_Pin btn_minus_Pin */
-  GPIO_InitStruct.Pin = btn_plus_Pin|btn_menu_Pin|btn_minus_Pin;
+  /*Configure GPIO pin : dht22_pin_Pin */
+  GPIO_InitStruct.Pin = dht22_pin_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(dht22_pin_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : btn_minus_Pin btn_menu_Pin btn_plus_Pin */
+  GPIO_InitStruct.Pin = btn_minus_Pin|btn_menu_Pin|btn_plus_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
@@ -665,7 +779,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pins : id_bit0_Pin id_bit1_Pin */
   GPIO_InitStruct.Pin = id_bit0_Pin|id_bit1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
@@ -678,6 +792,11 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+uint8_t check_if_addon() {
+  //Checks both id_bit0 and id_bit1 and combines them.
+  return (((GPIOD->IDR & GPIO_IDR_ID3) << 1) | (GPIOD->IDR & GPIO_IDR_ID2));
+}
 
 /**
  * Sets the Time of the RTC. IMPORTANT: When regenerating the code through CubeMX comment out the time setting in the predefined function.
@@ -791,16 +910,10 @@ void ssd1306_writeDate(char* date) {
   ssd1306_UpdateScreen();
 }
 
-void ssd1306_writeMisc(int8_t _data) {
-  char buffer[1] = {_data};
+void ssd1306_writeMisc(char* _data) {
   ssd1306_SetCursor(DISPLAY_MISC_X_OFFSET, DISPLAY_MISC_Y_OFFSET);
-  ssd1306_WriteString(buffer, Font_7x10, White);
+  ssd1306_WriteString(_data, Font_7x10, White);
   ssd1306_UpdateScreen();
-}
-
-//Interrupt for triggering an update event every second
-void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc) {
-  tick_flag = set;
 }
 
 /** Function for changing the tubes to the corresponding time values
@@ -884,6 +997,77 @@ void output_to_tubes(uint16_t _data) {
   GPIOB->ODR = _data;
 }
 
+void menu1() {
+  if(sensor_flag) {
+    uint8_t tempData_tens;
+    uint8_t tempData_ones;
+    uint8_t hmdData_tens;
+    uint8_t hmdData_ones;
+    
+    DHT22_ReadData(&tempData_tens, &tempData_ones, &hmdData_tens, &hmdData_ones);
+    output_to_tubes(combine_4bit_numbers(tempData_tens, tempData_ones, hmdData_tens, hmdData_ones));
+
+    sensor_flag = 0;
+  }
+}
+
+void menu_startStop() {
+  
+}
+
+void menu_timeSet() {  
+  
+}
+
+void menu_timeout(uint8_t _menu_pos) {
+
+  if((btn_flag_plus == isPressed) || (btn_flag_menu == isPressed) || (btn_flag_minus == isPressed)) {
+    start_ms_counter_menuTimeout = HAL_GetTick();
+  }
+
+  if(_menu_pos != 1) {
+
+    //When timeout happens, get back to menu 0;
+    if((HAL_GetTick()-start_ms_counter_menuTimeout) > DISPLAY_MENU_X_TIMEOUT) {
+      menu_pos = 0;
+      //start_ms_counter_menuTimeout = 0;
+    }
+
+  } else if (menu_pos == 1) {
+
+    //When timeout happens, get back to menu 0;
+    if((HAL_GetTick()-start_ms_counter_menuTimeout) > DISPLAY_MENU_1_TIMEOUT) {
+      menu_pos = 0;
+      //start_ms_counter_menuTimeout = 0;
+    }
+
+  }
+}
+
+/**
+ * @brief: Function to blink the front leds.
+ * @param mode: 0-> no blinking, 1-> both, 2-> top, 3-> bot
+ */
+void output_blink_front_leds(uint8_t _mode) {
+  switch(_mode) {
+    case 0: 
+      output_front_led(1, 1);
+      break;
+
+    case 1: 
+      output_front_led(tick_blink, tick_blink);
+      break;
+
+    case 2:
+      output_front_led(tick_blink, 1);
+      break;
+
+    case 3:
+      output_front_led(1, tick_blink);
+      break;
+  }
+}
+
 /**
  * @brief: Function to manipulate the front leds.
  * @param led0: top led
@@ -903,6 +1087,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   tick_blink = !tick_blink;
 }
 
+//Interrupt for triggering an update event every second
+void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc) {
+  tick_flag = set;
+
+  //counter_seconds++;
+}
+
+
 /**
  * Interrupt Handler for the buttons
  */
@@ -918,6 +1110,13 @@ void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin) {
 
     case btn_menu_Pin:
       btn_flag_menu = 1;
+
+      //Cycle through the menu positions through all menus (4 menus -> 0,1,2,3 -> so menu_size-1)
+      if(menu_pos < menu_size-1) menu_pos++;
+      else menu_pos = 0;
+      
+      if(menu_pos == 1) sensor_flag = 1;
+
       break;
 
     default:

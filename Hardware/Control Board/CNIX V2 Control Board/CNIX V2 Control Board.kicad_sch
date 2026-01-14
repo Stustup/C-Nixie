@@ -10156,7 +10156,7 @@
 		(uuid "1c867e25-3170-4eca-8045-13115586b615")
 	)
 	(label "btn_minus"
-		(at 118.11 163.83 0)
+		(at 118.11 146.05 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10346,7 +10346,7 @@
 		(uuid "4c8e8722-31ce-4a6b-8240-b70e8e313319")
 	)
 	(label "btn_minus"
-		(at 101.6 63.5 180)
+		(at 101.6 58.42 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10556,7 +10556,7 @@
 		(uuid "8f24e8c9-de7c-47f9-a339-90e203fc0d89")
 	)
 	(label "btn_plus"
-		(at 101.6 58.42 180)
+		(at 101.6 63.5 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10666,7 +10666,7 @@
 		(uuid "c1297de6-ac9b-403a-bfe3-d8874571b72e")
 	)
 	(label "btn_plus"
-		(at 118.11 146.05 0)
+		(at 118.11 163.83 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10983,7 +10983,7 @@
 				)
 			)
 		)
-		(property "Value" "SW_Plus"
+		(property "Value" "SW_Minus"
 			(at 156.21 141.1224 0)
 			(effects
 				(font
@@ -11149,7 +11149,7 @@
 				)
 			)
 		)
-		(property "Value" "SW_Minus"
+		(property "Value" "SW_Plus"
 			(at 156.21 158.9024 0)
 			(effects
 				(font
