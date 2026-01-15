@@ -1,12 +1,10 @@
 # CNIX - Nixie Tube Clock ->WORK IN PROGRESS
 
-DO NOT BUILD THE TUBE BOARD, THE PIN NUMBERS ARE MIRRORED
-
 CNIX is a nixie tube clock which accepts many diffrent nixie tubes with only slight modifications to the tube carrier board. 
 
 ![Nixie Clock tube board](./Docs/CNIX%20V2%20tube%20board%20side.png)
 
-The motivation was, that there are not many clocks out there, that let you use almost any nixie tube you like. Most have fixed power supplies, 
+The motivation was, that there are not many clocks out there that let you use almost any nixie tube you like. Most have fixed power supplies, 
 underdesigned driver stages or inflexible microcontrollers. I hope to tackle these problems with an adjustable boost converter PSU, extremely 
 flexible (and electrically protected) driver stages and an open source firmware written with free tools.
 
@@ -30,6 +28,16 @@ Time is set manually with the push buttons on top.
 The PSU is heavily inspired by [this site](https://surfncircuits.com/2018/02/03/optimizing-the-5v-to-170v-nixie-tube-power-supply-design-part-2/).  
 
 ![Control board 3d view](./Docs/CNIX%20V2%20control%20board%20front.png)
+
+## Neat features
+
+### Addon Boards
+I designed an addon-board which just plugs into the broken out pins on the control board, to host all kinds of stuff. The one i already made has an DCF77 antenna for automatically getting the exact time OTA in germany. It also holds a DHT22 temperature and humidity sensor,which can be accessed via a single press on the "menu" button on the control board. 
+The addon-boards get detected via two pins (D2 a& D3), which form a 2 bit id system. so 0b11 means no board is connected, because i used internal pullups. the DCF77 board has the id 0b00, which deactivates the manual time setting menu and adds the temperature and humidity menu. 
+With this all kinds of boards are possible, for example an ESP32 addon board with ESP-Home installed to integrate the clock and a sensor into homeassistant.
+
+### Turn on/off timers
+You can set power on and off times in the clock natively, so that the nixies dont always glow. With this the HT-power supply also gets deactivated to save power and lifespan of the parts. More advanced features like weekday dependant times have to be programmed directly into the µC, except if you want to code a big menu with just 3 buttons and 2 LEDs.
 
 ## TODO
 
