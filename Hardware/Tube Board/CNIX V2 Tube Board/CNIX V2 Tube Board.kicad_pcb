@@ -15698,6 +15698,18 @@
 		(layer "User.1")
 		(uuid "b6202f7b-9804-4b24-9ca9-4de2fba9208d")
 	)
+	(gr_text "Für Mama <3"
+		(at 72.136 77.47 0)
+		(layer "F.SilkS")
+		(uuid "1103728c-0729-4ac2-b9cf-a3cf4f648bd3")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+			(justify left bottom)
+		)
+	)
 	(dimension
 		(type aligned)
 		(layer "User.1")
@@ -16197,6 +16209,15 @@
 		(uuid "042b04db-20f4-4e4c-af4e-90b2319cde22")
 	)
 	(via
+		(at 203.2 85.852)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(free yes)
+		(net 3)
+		(uuid "060ced2e-6e36-468c-a058-276f623b0e1a")
+	)
+	(via
 		(at 137 78)
 		(size 0.6)
 		(drill 0.3)
@@ -16278,6 +16299,15 @@
 		(uuid "12d847c7-0117-425e-ba9b-521dafe741f6")
 	)
 	(via
+		(at 192.659 86.487)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(free yes)
+		(net 3)
+		(uuid "13288858-5433-43ae-be46-4c0d7e4cff9f")
+	)
+	(via
 		(at 128 82.5)
 		(size 0.6)
 		(drill 0.3)
@@ -16338,6 +16368,15 @@
 		(free yes)
 		(net 3)
 		(uuid "1cd0bc6a-7f91-4ceb-94d2-ffb2d80a6ced")
+	)
+	(via
+		(at 187.706 86.36)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(free yes)
+		(net 3)
+		(uuid "1cd1996d-4c2b-4e88-b8e6-a9b7fda91918")
 	)
 	(via
 		(at 135 79.25)
@@ -16482,6 +16521,15 @@
 		(free yes)
 		(net 3)
 		(uuid "322bbc3a-be4e-409c-8b18-28276868799a")
+	)
+	(via
+		(at 203.835 85.217)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(free yes)
+		(net 3)
+		(uuid "32b881ef-1b27-43e3-a57b-436bb4f4f17d")
 	)
 	(via
 		(at 98.775 81.3)
@@ -17838,6 +17886,15 @@
 		(uuid "dd175bf7-fdf2-4a7b-b034-99c1041673bf")
 	)
 	(via
+		(at 202.311 86.233)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(free yes)
+		(net 3)
+		(uuid "de07fcde-08d7-4775-bc55-839310d064d8")
+	)
+	(via
 		(at 149.5 86.5)
 		(size 0.6)
 		(drill 0.3)
@@ -17970,6 +18027,15 @@
 		(free yes)
 		(net 3)
 		(uuid "f2e7b0a5-105e-41d4-a761-b117fd5441f8")
+	)
+	(via
+		(at 190.5 86.487)
+		(size 0.6)
+		(drill 0.3)
+		(layers "F.Cu" "B.Cu")
+		(free yes)
+		(net 3)
+		(uuid "f4b06a12-927e-4a52-b9eb-7db2bc6620c5")
 	)
 	(via
 		(at 163.75 83)
