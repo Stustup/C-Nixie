@@ -2518,6 +2518,12 @@
 		(uuid "581bc4d7-b88a-4e34-b3c6-1f84a2648803")
 	)
 	(junction
+		(at 233.68 87.63)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "65dd16ec-4d7e-4def-8694-5a984b71245d")
+	)
+	(junction
 		(at 198.12 71.12)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2606,6 +2612,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b6192d09-f3d7-4cab-bf9d-026963d748ca")
+	)
+	(junction
+		(at 231.14 80.01)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "badd94b8-8bd4-4844-bb30-fe8f7601175f")
 	)
 	(junction
 		(at 231.14 71.12)
@@ -3033,6 +3045,16 @@
 	)
 	(wire
 		(pts
+			(xy 231.14 80.01) (xy 229.87 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6a869eaa-43f8-4a6f-b0a2-0530fc3fb4b0")
+	)
+	(wire
+		(pts
 			(xy 83.82 97.79) (xy 83.82 77.47)
 		)
 		(stroke
@@ -3083,6 +3105,16 @@
 	)
 	(wire
 		(pts
+			(xy 229.87 80.01) (xy 229.87 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7232887c-81c0-4437-9964-8f0ecc423ba9")
+	)
+	(wire
+		(pts
 			(xy 82.55 97.79) (xy 83.82 97.79)
 		)
 		(stroke
@@ -3110,6 +3142,16 @@
 			(type default)
 		)
 		(uuid "7df0ca96-b07e-4f32-a965-05e1a918712f")
+	)
+	(wire
+		(pts
+			(xy 229.87 87.63) (xy 233.68 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "811b1544-6b6c-41fb-aa2b-a19f75a9ac16")
 	)
 	(wire
 		(pts
@@ -3180,6 +3222,16 @@
 			(type default)
 		)
 		(uuid "8b709909-3794-4f96-b5c8-b8d6780ab5b0")
+	)
+	(wire
+		(pts
+			(xy 241.3 80.01) (xy 233.68 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e18da98-cd8b-448f-9632-4f1a3ad47b3d")
 	)
 	(wire
 		(pts
@@ -3633,6 +3685,16 @@
 	)
 	(wire
 		(pts
+			(xy 233.68 87.63) (xy 233.68 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d3ce98ea-a708-4dd5-9962-7bff94e22025")
+	)
+	(wire
+		(pts
 			(xy 207.01 71.12) (xy 207.01 72.39)
 		)
 		(stroke
@@ -3823,6 +3885,16 @@
 	)
 	(wire
 		(pts
+			(xy 229.87 86.36) (xy 229.87 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fb19f594-8c06-4ada-8455-b906c77232bb")
+	)
+	(wire
+		(pts
 			(xy 180.34 71.12) (xy 181.61 71.12)
 		)
 		(stroke
@@ -3900,6 +3972,16 @@
 			(justify left bottom)
 		)
 		(uuid "0cfb78be-dd72-4d1e-b1c0-d0fac68b4a4b")
+	)
+	(label "LED_ht"
+		(at 241.3 80.01 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "23048511-6895-43be-a213-3648361dc34d")
 	)
 	(label "FET_Source"
 		(at 186.69 93.98 180)
@@ -4100,7 +4182,7 @@
 			(uuid "c26481d6-c641-4426-81e7-b76498e3ae64")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "C111")
 					(unit 1)
@@ -4183,7 +4265,7 @@
 			(uuid "a969e347-e7e0-4661-9016-b36d7496c530")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R107")
 					(unit 1)
@@ -4286,7 +4368,7 @@
 			(uuid "253743b4-1e53-4489-9d97-954d4edaf8dc")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "D103")
 					(unit 1)
@@ -4387,7 +4469,7 @@
 			(uuid "46f727bb-8960-4839-83c6-be1d98021816")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R112")
 					(unit 1)
@@ -4452,7 +4534,7 @@
 			(uuid "19decfbf-044e-4db9-8d06-3ab70d4a0a8d")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0112")
 					(unit 1)
@@ -4535,7 +4617,7 @@
 			(uuid "a0d855b3-b5db-4460-90b1-ab421d48a20e")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R101")
 					(unit 1)
@@ -4600,7 +4682,7 @@
 			(uuid "217dd805-8b82-4463-a905-a6ddfdf63158")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0119")
 					(unit 1)
@@ -4677,6 +4759,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Mouser-Nr." ""
@@ -4702,7 +4785,7 @@
 			(uuid "e054860b-fa07-4f5d-a3e0-a6655aae04be")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "C101")
 					(unit 1)
@@ -4780,6 +4863,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Mouser-Nr." ""
@@ -4805,7 +4889,7 @@
 			(uuid "0c50699e-5187-4684-a52f-a6dc551d9202")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "C107")
 					(unit 1)
@@ -4907,7 +4991,7 @@
 			(uuid "a9ce7aa7-d46e-4eb7-bf8a-eb80aedc30dc")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R103")
 					(unit 1)
@@ -4990,7 +5074,7 @@
 			(uuid "34fa5949-0b92-4208-ab77-6cc9d1f3e519")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R100")
 					(unit 1)
@@ -5055,7 +5139,7 @@
 			(uuid "659fb71f-3277-4259-8077-de6b8928bffd")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0108")
 					(unit 1)
@@ -5158,7 +5242,7 @@
 			(uuid "8a5516b1-16bb-4622-b090-233dff6a348b")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "C112")
 					(unit 1)
@@ -5223,7 +5307,7 @@
 			(uuid "7f8f67a3-29ab-4bc6-8dd0-21f8016e9a8e")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0103")
 					(unit 1)
@@ -5327,7 +5411,7 @@
 			(uuid "61ef9384-203d-4ecb-a15e-13f22a358c75")
 		)
 		(instances
-			(project ""
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "D102")
 					(unit 1)
@@ -5392,7 +5476,7 @@
 			(uuid "f77e4ef6-8e4a-41d0-8ffc-d85bb7e36d87")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0101")
 					(unit 1)
@@ -5470,6 +5554,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Mouser-Nr." ""
@@ -5495,7 +5580,7 @@
 			(uuid "38547d2e-83a9-4283-a0eb-2c100e152697")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "C102")
 					(unit 1)
@@ -5643,7 +5728,7 @@
 			(uuid "ab4c77d5-a7e7-4795-804c-3f4a8f049088")
 		)
 		(instances
-			(project ""
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "U100")
 					(unit 1)
@@ -5744,7 +5829,7 @@
 			(uuid "e6721608-dcd4-4002-842d-939faaf017bc")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R102")
 					(unit 1)
@@ -5874,7 +5959,7 @@
 			(uuid "4a5ca962-a485-4b45-a10b-4364c9442fa8")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R108")
 					(unit 1)
@@ -5940,7 +6025,7 @@
 			(uuid "217aaaa7-843a-4ef8-90de-695fa1162583")
 		)
 		(instances
-			(project ""
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0100")
 					(unit 1)
@@ -6010,7 +6095,7 @@
 			(uuid "33e7cc8e-d5d4-49b9-ace8-b6637f412c8d")
 		)
 		(instances
-			(project ""
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "J100")
 					(unit 1)
@@ -6075,7 +6160,7 @@
 			(uuid "61221117-66fa-4b18-bfca-a9dd753adb6e")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0110")
 					(unit 1)
@@ -6203,7 +6288,7 @@
 			(uuid "e260e1ae-bbea-42f2-9b1b-950dcc963a8a")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "L100")
 					(unit 1)
@@ -6305,7 +6390,7 @@
 			(uuid "c9da39c2-8af7-4da5-b608-bc2e873c5c81")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R111")
 					(unit 1)
@@ -6388,7 +6473,7 @@
 			(uuid "032f86e1-6a78-44af-8df4-e1aa2d0289b0")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R113")
 					(unit 1)
@@ -6470,6 +6555,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(pin "2"
@@ -6479,7 +6565,7 @@
 			(uuid "97bc0e78-2202-498c-8a1c-fb8c0100e073")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R104")
 					(unit 1)
@@ -6545,6 +6631,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Reichelt-Nr." ""
@@ -6601,7 +6688,7 @@
 			(uuid "f202b8e3-ed71-4fe2-af9c-95c18d3b043f")
 		)
 		(instances
-			(project ""
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "D100")
 					(unit 1)
@@ -6663,7 +6750,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser URL" ""
+		(property "Mouser URL" "https://www.mouser.de/ProductDetail/Wurth-Elektronik/885342214003?qs=sGAEpiMZZMvsSlwiRhF8qrQG6leidpLj3vZ%252BpbGk2L4z%252BEau09zWag%3D%3D"
 			(at 207.01 74.93 0)
 			(effects
 				(font
@@ -6672,7 +6759,7 @@
 				(hide yes)
 			)
 		)
-		(property "Mouser Nr." " 810-CGA4J3X7T2E104MA "
+		(property "Mouser Nr." " 710-885342214003 "
 			(at 207.01 74.93 0)
 			(effects
 				(font
@@ -6697,6 +6784,24 @@
 				)
 			)
 		)
+		(property "Reichelt Nr." ""
+			(at 207.01 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Reichelt URL" ""
+			(at 207.01 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "21709dfe-b753-460b-9dd3-733d0fbfa157")
 		)
@@ -6704,7 +6809,7 @@
 			(uuid "21339192-a4a7-4115-9484-09b8d2ac447f")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "C110")
 					(unit 1)
@@ -6805,7 +6910,7 @@
 			(uuid "3cb66986-43e7-40b9-a9ce-677edc136589")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R110")
 					(unit 1)
@@ -6900,7 +7005,7 @@
 			(uuid "172f3b56-c032-4f24-bab1-40bc7a135fef")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "C104")
 					(unit 1)
@@ -6965,7 +7070,7 @@
 			(uuid "c9209127-e796-4333-9ad9-3f26810d49b8")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0104")
 					(unit 1)
@@ -7111,7 +7216,7 @@
 			(uuid "a9c3fc14-237a-4125-a892-0771fad11469")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "D101")
 					(unit 1)
@@ -7176,7 +7281,7 @@
 			(uuid "20d543fd-1558-4686-ab20-84f7423d51fc")
 		)
 		(instances
-			(project ""
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0106")
 					(unit 1)
@@ -7258,6 +7363,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(pin "2"
@@ -7267,7 +7373,7 @@
 			(uuid "e57d094e-884c-4046-86e7-f5a979251a86")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R105")
 					(unit 1)
@@ -7362,7 +7468,7 @@
 			(uuid "aaf5e2d4-c045-4efe-bb95-10ebd8655883")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "C106")
 					(unit 1)
@@ -7427,7 +7533,7 @@
 			(uuid "d4d922a9-bbb2-40e3-97ff-9c5543adbd8e")
 		)
 		(instances
-			(project ""
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0105")
 					(unit 1)
@@ -7528,7 +7634,7 @@
 			(uuid "bb27d2f1-7248-4722-8508-b51ebe9d6eb3")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "TP24")
 					(unit 1)
@@ -7538,7 +7644,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 233.68 87.63 0)
+		(at 233.68 88.9 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7546,7 +7652,7 @@
 		(dnp no)
 		(uuid "a2772a16-73f2-46b4-98c8-1cf057aa8d63")
 		(property "Reference" "#PWR06"
-			(at 233.68 93.98 0)
+			(at 233.68 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7555,7 +7661,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 236.474 90.424 0)
+			(at 236.474 91.694 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7563,7 +7669,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 233.68 87.63 0)
+			(at 233.68 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7572,7 +7678,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 233.68 87.63 0)
+			(at 233.68 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7581,7 +7687,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 233.68 87.63 0)
+			(at 233.68 88.9 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7593,7 +7699,7 @@
 			(uuid "22685f57-611a-4d9c-8cdf-37054db2f810")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR06")
 					(unit 1)
@@ -7670,6 +7776,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Mouser-Nr." ""
@@ -7695,7 +7802,7 @@
 			(uuid "1e57e274-b062-451f-a193-12b50bc9f7ea")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "C108")
 					(unit 1)
@@ -7778,7 +7885,7 @@
 			(uuid "829d3d36-61f2-423a-b656-f557c3170780")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R106")
 					(unit 1)
@@ -7882,7 +7989,7 @@
 			(uuid "dfc3e466-d7fd-44f1-9297-d1fcf448be53")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "C105")
 					(unit 1)
@@ -7983,7 +8090,7 @@
 			(uuid "8758bc1b-ca7b-4d66-8008-c0254030b892")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "R109")
 					(unit 1)
@@ -8048,7 +8155,7 @@
 			(uuid "b07dfb51-5547-4f80-b8be-747437529ca6")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0109")
 					(unit 1)
@@ -8149,7 +8256,7 @@
 			(uuid "6acac11a-3623-4268-b92a-6df18164655f")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "TP20")
 					(unit 1)
@@ -8214,9 +8321,112 @@
 			(uuid "54f7c676-667c-4325-8575-eb625564bd68")
 		)
 		(instances
-			(project ""
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0107")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 229.87 83.82 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e4596b7f-0277-4475-8ae2-1ba97e299e19")
+		(property "Reference" "C114"
+			(at 222.25 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n 250V"
+			(at 218.44 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
+			(at 229.87 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 229.87 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 229.87 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Mouser URL" ""
+			(at 229.87 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Mouser Nr." " 810-CGA4J3X7T2E104MA "
+			(at 229.87 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Mouser-Nr." ""
+			(at 229.87 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Reichelt-Nr." ""
+			(at 229.87 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "7938d58a-77d1-4865-bfa1-13a5f3aad4f3")
+		)
+		(pin "2"
+			(uuid "3ba63c1e-5a87-4aec-bf0a-b332bbdce14d")
+		)
+		(instances
+			(project "CNIX V2 Control Board"
+				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
+					(reference "C114")
 					(unit 1)
 				)
 			)
@@ -8279,7 +8489,7 @@
 			(uuid "24308751-2d4b-4d80-9ed6-910670a6220f")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0102")
 					(unit 1)
@@ -8357,6 +8567,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Mouser-Nr." ""
@@ -8382,7 +8593,7 @@
 			(uuid "ff8a1ce4-06cb-4f41-bb37-f0734b64ee42")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "C103")
 					(unit 1)
@@ -8530,7 +8741,7 @@
 			(uuid "7ae834ca-3f65-472a-988c-303082058c66")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "Q101")
 					(unit 1)
@@ -8608,6 +8819,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Mouser-Nr." ""
@@ -8633,7 +8845,7 @@
 			(uuid "0d9adc46-307d-434d-971d-5e230f4e86de")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "C109")
 					(unit 1)
@@ -8737,7 +8949,7 @@
 			(uuid "4729c582-cbcc-44c9-b4bb-9cd4f3897073")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "C100")
 					(unit 1)
@@ -8802,7 +9014,7 @@
 			(uuid "ed6cf8fd-3f71-4373-a496-e3e221343ee7")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0113")
 					(unit 1)
@@ -8893,7 +9105,7 @@
 			(uuid "232a1d38-67f9-4a21-aa35-8743c0c6205e")
 		)
 		(instances
-			(project ""
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "Q100")
 					(unit 1)
@@ -8958,7 +9170,7 @@
 			(uuid "86cc826a-16d6-432d-924b-8919e8c50bd4")
 		)
 		(instances
-			(project "NixieClock control board"
+			(project "CNIX V2 Control Board"
 				(path "/552fdcf9-00a6-4d96-ad8b-ee11dd6b40ba/9c594c2f-787f-4f16-953b-7a7d40f29933"
 					(reference "#PWR0111")
 					(unit 1)
