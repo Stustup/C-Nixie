@@ -1,8 +1,8 @@
-# CNIX - Nixie Tube Clock ->WORK IN PROGRESS
+<# CNIX - Nixie Tube Clock ->WORK IN PROGRESS
 
 CNIX is a nixie tube clock which accepts many diffrent nixie tubes with only slight modifications to the tube carrier board. 
 
-![Nixie Clock tube board](./Docs/CNIX%20V2%20tube%20board%20side.png)
+![Nixie Clock tube board](./Docs/Nixie%20Clock%20combined%203D.png)
 
 The motivation was, that there are not many clocks out there that let you use almost any nixie tube you like. Most have fixed power supplies, 
 underdesigned driver stages or inflexible microcontrollers. I hope to tackle these problems with an adjustable boost converter PSU, extremely 
@@ -27,7 +27,7 @@ Time is set manually with the push buttons on top.
 
 The PSU is heavily inspired by [this site](https://surfncircuits.com/2018/02/03/optimizing-the-5v-to-170v-nixie-tube-power-supply-design-part-2/). I highly advise you giving it a read. The article goes in depth with boost converter design and its challanges.
 
-![Control board 3d view](./Docs/CNIX%20V2%20control%20board%20front.png)
+![Control board 3d view](./Docs//CNIX%20V2%20control%20board%20front.png)
 
 ## Neat features
 
