@@ -32,9 +32,11 @@ The PSU is heavily inspired by [this site](https://surfncircuits.com/2018/02/03/
 ## Neat features
 
 ### Addon Boards
-I designed an addon-board which just plugs into the broken out pins on the control board, to host all kinds of stuff. The one i already made has an DCF77 antenna for automatically getting the exact time OTA in germany. It also holds a DHT22 temperature and humidity sensor,which can be accessed via a single press on the "menu" button on the control board. 
+I designed an addon-board which just plugs into the broken out pins on the control board, to host all kinds of stuff. The one i already made has an DCF77 antenna for automatically getting the exact time OTA in germany. It also holds a HTU21 temperature and humidity sensor from TE, which can be accessed via a single press on the "menu" button on the control board. 
 The addon-boards get detected via two pins (D2 a& D3), which form a 2 bit id system. so 0b11 means no board is connected, because i used internal pullups. the DCF77 board has the id 0b00, which deactivates the manual time setting menu and adds the temperature and humidity menu. 
 With this all kinds of boards are possible, for example an ESP32 addon board with ESP-Home installed to integrate the clock and a sensor into homeassistant.
+
+On the DCF77 Addon board there is a single pin to give structural strength to a simple perfboard on the main breakout bus. One can use this in tandem with the A1, A2, A3, A4, F0 and F1 pins.
 
 ### Turn on/off timers
 You can set power on and off times in the clock natively, so that the nixies dont always glow. With this the HT-power supply also gets deactivated to save power and lifespan of the parts. More advanced features like weekday dependant times have to be programmed directly into the µC, except if you want to code a big menu with just 3 buttons and 2 LEDs.
@@ -42,7 +44,8 @@ You can set power on and off times in the clock natively, so that the nixies don
 ## TODO
 
 - Change to new MCU. STM32H5 or ESP32. ESP32 for Wifi stuff like syncing time, Homeassistant integration etc. Could be done as module for the pinheader. STM32H5 for USBC pd
-    - Not necessary, BUT-> Create Plugion board for a DCF77 reciever conencting via GPIO
+    - (DONE) Not necessary, BUT-> Create Plugin board for a DCF77 reciever conencting via GPIO
+    - Addon board for Homeassistant Integration?
 - (DONE) lower value caps for the LSE
 - USB-PD (only with STM32H5) (Not neccessary)
-- DHT22 Temp and relative humidity sensor -> Can be cool
+- (DONE) HTU21 Temp and relative humidity sensor
