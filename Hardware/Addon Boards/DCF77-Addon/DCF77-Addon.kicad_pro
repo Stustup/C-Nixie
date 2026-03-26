@@ -188,6 +188,7 @@
       ],
       "track_widths": [
         0.0,
+        0.4,
         0.7
       ],
       "tuning_pattern_settings": {
@@ -501,7 +502,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "../../../Production/DCF77 Addon Board/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "3D/DCF77-Addon.step",

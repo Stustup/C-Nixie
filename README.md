@@ -38,6 +38,8 @@ With this all kinds of boards are possible, for example an ESP32 addon board wit
 
 On the DCF77 Addon board there is a single pin to give structural strength to a simple perfboard on the main breakout bus. One can use this in tandem with the A1, A2, A3, A4, F0 and F1 pins.
 
+![DCF77 Addon Board]
+
 ### Turn on/off timers
 You can set power on and off times in the clock natively, so that the nixies dont always glow. With this the HT-power supply also gets deactivated to save power and lifespan of the parts. More advanced features like weekday dependant times have to be programmed directly into the µC, except if you want to code a big menu with just 3 buttons and 2 LEDs.
 
